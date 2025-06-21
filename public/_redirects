@@ -1,0 +1,9 @@
+# Redirecciones personalizadas
+/contact /contacto 301
+/about /nosotros 301
+/services /servicios 301
+/process /proceso 301
+/testimonials /testimonios 301
+
+# Manejo de errores
+/* /404.html 404
