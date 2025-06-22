@@ -59,7 +59,7 @@ export const generateMetadata = ({
   const linkTags = [
     { rel: 'canonical', href: fullUrl },
     { rel: 'alternate', href: fullUrl, hreflang: locale },
-    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    { rel: 'icon', type: 'image/x-icon', href: '/es.ico' },
     { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
   ];
 
