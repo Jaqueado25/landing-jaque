@@ -1,17 +1,11 @@
 ---
+import JaqueLogo from './JaqueLogo.astro';
 // No se necesita lógica específica en el frontmatter
 ---
 
 <div id="loading-animation" class="fixed inset-0 bg-white z-[9999] flex flex-col items-center justify-center transition-opacity duration-500">
   <div class="animate-bounce flex flex-col items-center">
-    <img 
-      src="/logo-jaque.png" 
-      alt="Jaque" 
-      class="h-20 w-auto mb-4 opacity-0 animate-fadeIn"
-      style="animation-delay: 0.3s;"
-      width="120"
-      height="40"
-    />
+    <JaqueLogo class="flex-col"/>
     <div class="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
       <div class="h-full bg-gradient-to-r from-primary-500 to-primary-700 animate-loading-bar"></div>
     </div>
