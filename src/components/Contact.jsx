@@ -1,0 +1,217 @@
+import React, { useState } from 'react';
+
+const contactMethods = [
+  {
+    title: 'Correo electrónico',
+    description: 'Envíanos un correo y te responderemos lo antes posible',
+    value: import.meta.env.VITE_PUBLIC_CONTACT_EMAIL,
+    icon: 'M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75'
+  },
+  {
+    title: 'Teléfono',
+    description: 'Llámanos de lunes a viernes de 9am a 6pm',
+    value: import.meta.env.VITE_PUBLIC_CONTACT_PHONE,
+    icon: 'M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z'
+  },
+  {
+    title: 'Oficina',
+    description: 'Visítanos en nuestras oficinas',
+    value: import.meta.env.VITE_PUBLIC_CONTACT_ADDRESS,
+    icon: 'M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm2.25 0a5.25 5.25 0 10-10.5 0 5.25 5.25 0 0010.5 0zM3.75 10.5a8.25 8.25 0 1114.59 5.28 19.91 19.91 0 01-5.003 3.57 15.04 15.04 0 01-4.573 1.193 10.89 10.89 0 01-4.176-.44 8.265 8.265 0 01-3.86-2.4 8.2 8.2 0 01-1.802-4.73 8.1 8.1 0 01.44-4.176 8.25 8.25 0 012.4-3.86 8.3 8.3 0 014.73-1.802 8.1 8.1 0 014.176.44 8.25 8.25 0 016.16 6.16 8.1 8.1 0 01.44 4.176 19.75 19.75 0 01-1.623 6.29'
+  },
+  {
+    title: 'Redes Sociales',
+    description: 'Síguenos en nuestras redes sociales',
+    value: `@${import.meta.env.VITE_PUBLIC_TWITTER_HANDLE}`,
+    icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z'
+  }
+];
+
+const Contact = () => {
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '', privacy: false });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Aquí puedes agregar lógica para enviar el formulario (EmailJS, API, etc.)
+    alert('Mensaje enviado (simulado)');
+  };
+
+  return (
+    <>
+      <section id="contacto" className="py-20 bg-white">
+        <div className="container">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="inline-block px-4 py-2 text-sm font-semibold text-primary bg-primary/10 rounded-full mb-4">Contacto</span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Hablemos sobre tu proyecto</h2>
+            <p className="text-lg text-gray-600">
+              Completa el formulario y nos pondremos en contacto contigo lo antes posible.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Contact Form */}
+            <div className="bg-gray-50 rounded-2xl p-8 md:p-10 shadow-sm border border-gray-100">
+              <h3 className="text-2xl font-bold mb-6">Envíanos un mensaje</h3>
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                      placeholder="Tu nombre"
+                      value={form.name}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                      placeholder="tucorreo@ejemplo.com"
+                      value={form.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Asunto</label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    placeholder="¿En qué podemos ayudarte?"
+                    value={form.subject}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    placeholder="Cuéntanos más sobre tu proyecto..."
+                    value={form.message}
+                    onChange={handleChange}
+                  ></textarea>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="privacy"
+                    name="privacy"
+                    required
+                    className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+                    checked={form.privacy}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="privacy" className="ml-2 block text-sm text-gray-700">
+                    Acepto la <a href="#" className="text-primary hover:underline">Política de Privacidad</a>
+                  </label>
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    className="btn btn-primary w-full flex items-center justify-center"
+                  >
+                    Enviar mensaje
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                    </svg>
+                  </button>
+                </div>
+              </form>
+            </div>
+            {/* Contact Info */}
+            <div>
+              <h3 className="text-2xl font-bold mb-6">Información de contacto</h3>
+              <p className="text-gray-600 mb-8">
+                Estamos aquí para ayudarte. Completa el formulario o utiliza cualquiera de los siguientes métodos para contactarnos.
+              </p>
+              <div className="space-y-6">
+                {contactMethods.map((method, index) => (
+                  <div
+                    key={index}
+                    className="flex items-start"
+                    data-aos="fade-up"
+                    data-aos-delay={index * 100}
+                  >
+                    <div className="flex-shrink-0 w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center mr-4">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d={method.icon}
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900">{method.title}</h4>
+                      <p className="text-gray-600">{method.value}</p>
+                      <p className="text-sm text-gray-500 mt-1">{method.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-12 bg-gray-50 p-6 rounded-xl">
+                <h4 className="font-bold text-gray-900 mb-4">Horario de atención</h4>
+                <ul className="space-y-2">
+                  <li className="flex justify-between">
+                    <span className="text-gray-600">Lunes - Viernes</span>
+                    <span className="font-medium">9:00 - 18:00</span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span className="text-gray-600">Sábado</span>
+                    <span className="font-medium">10:00 - 14:00</span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span className="text-gray-600">Domingo</span>
+                    <span className="font-medium">Cerrado</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Map */}
+      <div className="h-96 bg-gray-100">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.016713276468!2d-58.38376592467432!3d-34.60373888166038!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccacf425e4b0d%3A0x6f7f5e7b5f1b5e6e!2sObelisco!5e0!3m2!1ses-419!2sar!4v1623456789012!5m2!1ses-419!2sar"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen=""
+          loading="lazy"
+          className="w-full h-full"
+          title="Ubicación oficina"
+        ></iframe>
+      </div>
+    </>
+  );
+};
+
+export default Contact; 

@@ -1,54 +1,20 @@
 module.exports = {
   root: true,
-  parser: '@typescript-eslint/parser',
+  env: { browser: true, es2020: true },
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:astro/recommended',
-    'plugin:jsx-a11y/recommended',
-    'prettier',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
   ],
-  plugins: ['@typescript-eslint', 'prettier'],
-  env: {
-    browser: true,
-    node: true,
-    es2022: true,
-  },
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
-  },
-  overrides: [
-    {
-      files: ['*.astro'],
-      parser: 'astro-eslint-parser',
-      parserOptions: {
-        parser: '@typescript-eslint/parser',
-        extraFileExtensions: ['.astro'],
-      },
-      rules: {
-        'prettier/prettier': 'error',
-      },
-    },
-    {
-      files: ['**/*.astro/*.js', '*.astro/*.js'],
-      parser: '@typescript-eslint/parser',
-    },
-  ],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  settings: { react: { version: '18.2' } },
+  plugins: ['react-refresh'],
   rules: {
-    'prettier/prettier': 'error',
-    '@typescript-eslint/no-unused-vars': [
+    'react-refresh/only-export-components': [
       'warn',
-      {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        caughtErrorsIgnorePattern: '^_',
-      },
+      { allowConstantExport: true },
     ],
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    'jsx-a11y/no-onchange': 'off',
   },
 }
